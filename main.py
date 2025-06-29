@@ -26,6 +26,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    print(f"Received message from {message.author}: {message.content}")
     if message.author == client.user:
         return
 
@@ -61,7 +62,7 @@ async def on_message(message):
                     {"role": "user", "content": text_content},
                 ],
             )
-            ai_response_content = response.choices[0].message.content.strip()
+            ai_response_content = response.choices[0].message.content
             await message.channel.send(ai_response_content)
 
 client.run(DISCORD_BOT_TOKEN)

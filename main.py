@@ -18,6 +18,11 @@ client = discord.Client(intents=intents)
 @client.event
 async def on_ready():
     print(f'We have logged in as {client.user}')
+    for guild in client.guilds:
+        for channel in guild.text_channels:
+            if channel.permissions_for(guild.me).send_messages:
+                await channel.send('起動にゃ！')
+                return # 最初のチャンネルに送信したら終了
 
 @client.event
 async def on_message(message):
